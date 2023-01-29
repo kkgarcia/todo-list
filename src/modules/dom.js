@@ -4,7 +4,7 @@ const projectsContainer = document.querySelector('.projects');
 const addProjectBtn = document.getElementById('add-project');
 const projectNameInput = document.getElementById('project-name-input');
 const todosContainer = document.querySelector('.todos')
-const taskForm = document.querySelector('.task-form')
+const taskForm = document.querySelector('.blur')
 const addBtn = document.querySelector('#add')
 
 //form
@@ -12,16 +12,19 @@ const title = document.querySelector('#title')
 const details = document.querySelector('#details')
 const dueDate = document.querySelector('#date')
 const priorities = document.querySelectorAll('[name="priority"]')
-
+const edit = document.querySelector('#edit')
 
 
 addProjectBtn.addEventListener('click', addProject);
 addBtn.addEventListener('click', addTask)
+edit.addEventListener('click', editTask)
 
 
 // separate module
 
-const projects = [];
+const projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+renderProjects()
 
 let currentFolderIndex = 0;
 let currentFolderName = '';
@@ -31,6 +34,7 @@ function isNameExist() {
     for (let i = 0; i < projects.length; i++) {
         if (projectNameInput.value === projects[i].name) {
             //render name exists 
+            alert('project exists')
             return true
         }
     }
@@ -47,7 +51,7 @@ function addProject() {
 
         projects.push(project)
 
-        // localStorage.setItem('projects', JSON.stringify(projects))
+        localStorage.setItem('projects', JSON.stringify(projects))
 
         console.log(projects)
         renderProjects()
@@ -61,6 +65,7 @@ function renderProjects() {
     // const projectLocal = localStorage.getItem('projects')
     // console.log(JSON.parse(projectLocal))
 
+    projectNameInput.value = '';
     projectsContainer.innerHTML = '';
 
     //create project component
@@ -91,6 +96,8 @@ function deleteProject() {
     }
     
     projects.splice(this.dataset.index, 1);
+
+    localStorage.setItem('projects', JSON.stringify(projects))
     
     renderProjects()
 
@@ -138,7 +145,8 @@ function renderTodos() {
         // const tasK = createTask(id=index, todo.title, todo.dueDate, priority)
 
         const task = document.createElement('div');
-        const del = document.createElement('button')
+        const del = document.createElement('button');
+        const edit = document.createElement('button')
 
         task.classList.add('task')
         task.dataset.id = index
@@ -148,11 +156,15 @@ function renderTodos() {
         del.dataset.id = index
         task.append(del)
 
+        edit.dataset.id = index
+        edit.innerText = 'edit'
+        task.append(edit)
 
         todosContainer.append(task)
 
         // task.addEventListener('click', setSelectedTask)
         del.addEventListener('click', deleteTask)
+        edit.addEventListener('click', showEditForm)
     })
     // todo.textContent = Object.values(desc)
     // todo.textContent = todos
@@ -162,20 +174,68 @@ function renderTodos() {
     addtaskBtn.addEventListener('click', showForm)
 }
 
+function showEditForm() {
+    //toggle buttons
+
+    taskForm.style.display = 'flex'
+
+    selectedTask = this.dataset.id
+    const task = projects[currentFolderIndex].todos[this.dataset.id]
+
+    title.value = task.title
+    details.value = task.details
+    dueDate.value = task.dueDate
+    const priority = task.priority
+    priorities.forEach(input => {
+        if (input.value === priority) {
+            input.checked = true
+        }
+    })
+}
+
+function editTask(event) {
+    event.preventDefault()
+    // check if input not empty TODO
+
+    const task = projects[currentFolderIndex].todos[selectedTask]
+
+    task.title = title.value
+    task.details = details.value
+    task.dueDate = dueDate.value
+    priorities.forEach(input => {
+        if (input.checked) task.priority = input.value
+    })
+
+    localStorage.setItem('projects', JSON.stringify(projects))
+
+    renderTodos()
+
+    taskForm.style.display = 'none'
+
+    clearForm()
+}
+
 function deleteTask() {
     selectedTask = this.dataset.id
     projects[currentFolderIndex].todos.splice(selectedTask, 1)
+
+    localStorage.setItem('projects', JSON.stringify(projects))
+
     renderTodos()
 }
 
-function setSelectedTask() {
-    selectedTask = this.dataset.id
-    console.log('task id: '+ selectedTask)
+function clearForm() {
+    title.value = '';
+    details.value = '';
+    dueDate.value = '';
+    priorities[0].checked = true;
 }
 
 function showForm() {
+    // toggle buttons
+
     console.log('current folder:  ' + projects[currentFolderIndex].name)
-    taskForm.style.display = 'block'
+    taskForm.style.display = 'flex'
 }
 
 
@@ -194,12 +254,13 @@ function addTask(event) {
     projects[currentFolderIndex].todos.push(task)
     console.log(projects)
     
+    localStorage.setItem('projects', JSON.stringify(projects))
+
     // rerender dotos
     
     renderTodos()
 
-    //clear inputs
-    
     taskForm.style.display = 'none'    
+    //clear inputs
+    clearForm()
 }
-

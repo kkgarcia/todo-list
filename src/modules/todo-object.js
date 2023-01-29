@@ -1,11 +1,12 @@
 
 
-function todoObject(title, description='', dueDate, priority) {
+function todoObject(title, details='', dueDate, priority, completed=false) {
     const main = {
         title,
-        description,
+        details,
         dueDate,
         priority,
+        completed
     }
     const proto = {
         getTitle() {

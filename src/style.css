@@ -5,8 +5,8 @@
 
 body {
     background-color: rgb(227, 208, 208);
+    position: relative;
 }
-
 
 .projects-sidebar {
     width: 30%;
@@ -33,9 +33,20 @@ body {
     cursor: pointer;
 }
 
-.task-form {
+.blur {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    backdrop-filter: blur(8px);
+    width: 100vw;
+    height: 100vh;
     display: none;
-    margin-left: 30%;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-form {
+    background-color: rgb(186, 186, 186);
 }
 
 .task:hover {
