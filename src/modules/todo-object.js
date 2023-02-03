@@ -1,12 +1,12 @@
 
 
-function todoObject(title, details='', dueDate, priority, completed=false) {
+function todoObject(title, details, dueDate, priority, checked=false) {
     const main = {
         title,
         details,
         dueDate,
         priority,
-        completed
+        checked
     }
     const proto = {
         getTitle() {

@@ -4,37 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Metal+Mania&family=Raleway:ital,wght@1,200&display=swap" rel="stylesheet">
     <title>TODO List</title>
 </head>
 <body>
+    <header>
+        <h1>ToDo</h1>
+    </header>
     <div class="main">
         <div class="projects-sidebar">
-            <input type="text" id="project-name-input">
-            <button id="add-project">Add Project</button>
-            <div class="projects"></div>
+            <div class="projects">
+>
+
+            </div>
+            <div class="project-input-form toggle">
+                <input type="text" id="project-name-input" placeholder="Name" maxlength="25">
+                <div class="project-buttons">
+                    <button id="add-project">Add</button>
+                    <button id="cancel">Cancel</button>
+                </div>
+            </div>
+            <div class="show-project-input-form">
+                <div class="plus-icon icon"></div>
+                <div>Add Project</div>
+            </div>
         </div>
         <div class="todos">
+            <!-- <div class="todo priority-low">
+                <input type="checkbox">
+                <div class="title">wash</div>
+                <button>details</button>
+                <div>31/01/2032</div>
+                <button>edit</button>
+                <button>delete</button>
+            </div>
+            <div class="todo priority-med">
+                <input type="checkbox">
+                <div class="title checked">wash dishes</div>
+                <button>details</button>
+                <div>31/01/2032</div>
+                <button>edit</button>
+                <button>delete</button>
+            </div> -->
         </div>
         <div class="blur">
             <div class="task-form">
-                <form action="#">
+                <div id="close-form-btn"></div>
+                <form class="myform" action="#">
                     <div>
-                        <label for="title">Title</label>
-                        <input type="text" id="title" required>
+                        <input type="text" id="title" maxlength="35" placeholder="Title" required>
                     </div>
                     <div>
-                        <label for="details">Details</label>
-                        <textarea name="details" id="details" cols="20" rows="5"></textarea>
+                        <textarea name="details" id="details" cols="20" rows="5" placeholder="Details"></textarea>
                     </div>
                     <div>
-                        <label for="date">Due Date</label>
+                        <label for="date">Due Date:</label>
                         <input type="date" id="date" required>
                     </div>
                     <div>
-                        <label for="priority">Priority</label>
-                        <input type="radio" name="priority" value="low" checked>
-                        <input type="radio" name="priority" value="medium">
-                        <input type="radio" name="priority" value="high">
+                        <div>Priority:</div>
+                        <label class="custom">
+                            <input type="radio" name="priority" value="low" checked required>
+                            <span class="low">Low</span>
+                        </label>
+                        <label class="custom">
+                            <input type="radio" name="priority" value="medium">
+                            <span class="med">Medium</span>
+                        </label>
+                        <label class="custom">
+                            <input type="radio" name="priority" value="high">
+                            <span class="high">High</span>
+                        </label>
                     </div>
                     <button id="add">Add</button>
                     <button id="edit">Edit</button>
@@ -42,5 +84,8 @@
             </div>
         </div>
     </div>
+    <footer>
+        <p>kkgarcia</p>
+    </footer>
 </body>
 </html>

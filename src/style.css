@@ -1,33 +1,177 @@
+
 * {
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
 }
 
-body {
-    background-color: rgb(227, 208, 208);
-    position: relative;
+body,
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+body{
+    font-family: 'Itim', cursive;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(89, 119, 120);
+}
+
+header {
+    padding: 3rem 2rem;
+    font-size: 1.5rem;
+    background-color: rgb(110, 110, 110);
+    color: white;
+}
+
+.main,
+header,
+footer {
+    margin-inline: auto;
+    width: min(90%, 70.5rem);
+    /* border: 1px solid black; */
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    background-color: rgb(234, 234, 234);
 }
 
 .projects-sidebar {
-    width: 30%;
-    background-color: #fff;
-    height: 100%;
-    position: fixed;
+    flex: 1;
+    background-color: rgb(217, 217, 217);
+    padding: 1rem 2rem;
     overflow: auto;
 }
 
+#project-name-input {
+    border: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: 12px;
+    border-radius: 3px;
+    outline: none;
+}
+
+#project-name-input:focus::placeholder {
+    color: transparent;
+}
+
+#project-name-input::placeholder {
+    transition: color 0.3s ease;
+}
+
+.project-input-form > input {
+    padding: 0.5rem;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.toggle {
+    display: none
+}
+
+.project-buttons {
+    padding: 1rem 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.project-buttons > button,
+.add-task-btn {
+    padding: 0.5rem 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px;;
+    border: none;
+    box-shadow: 2px 2px 3px rgb(83, 83, 83);
+}
+
+.project-buttons > button:hover,
+.add-task-btn:hover {
+    background: rgb(221, 221, 221);
+}
+
+.add-task-btn {
+    padding: 0.5rem 1rem;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.show-project-input-form {
+    border: 1px solid rgb(167, 167, 167);
+    padding: .5rem 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.show-project-input-form:hover {
+    background: rgb(233, 233, 233);
+    cursor: pointer;
+}
+
 .todos {
-    background-color: rgb(213, 241, 175);
-    margin-left: 30%;
+    flex: 3;
+    padding: 1rem 2rem;
+    /* background-color: rgb(213, 241, 175); */
+    overflow: auto;
 }
 
 .project {
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: rgba(92, 92, 92, 0.2);
+    color: rgb(72, 72, 72);
+    border-radius: 3px;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
 }
 
-.project-focus {
-    background-color: rgba(136, 136, 136, 0.5);
+.project:hover {
+    background: rgba(92, 92, 92, 0.5);
 }
+
+.delete-icon {
+    background-image: url('./icons/delete.svg');
+}
+
+.edit-icon {
+    background-image: url('./icons/pencil.svg');
+}
+
+.close-icon {
+    background-image: url('./icons/close.svg');
+}
+
+.plus-icon {
+    background-image: url('./icons/plus.svg');
+}
+
+.icon {
+    min-width: 1.5rem;
+    height: 1.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.icon:hover {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: rgba(92, 92, 92, 0.5);
+    color: rgb(42, 42, 42);
+}
+
 
 .addtask {
     cursor: pointer;
@@ -40,16 +184,178 @@ body {
     backdrop-filter: blur(8px);
     width: 100vw;
     height: 100vh;
-    display: none;
+    display: none;/* later to none */
     justify-content: center;
     align-items: center;
 }
 
 .task-form {
-    background-color: rgb(186, 186, 186);
+    background-color: rgb(220, 220, 220);
+    border-radius: 5px;
+}
+
+.task-form form {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
 }
 
 .task:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.todo {
+    font-size: 1.1rem;
+    padding: 1rem 1rem;
+    background-color: rgb(241, 241, 241);
+    box-shadow: 2px 2px 3px rgb(138, 138, 138);
+    border-radius: 5px;
+    display: flex;
+    gap: 1.3rem;
+    align-items: center;
+    overflow: auto;
+    margin-bottom: 1rem;
+}
+
+.details-btn {
+    background-color: rgb(107, 107, 255);
+    color: rgb(248, 248, 248);
+    border: none;
+    border-radius: 3px;
+}
+
+.details-btn:hover {
+    background-color: rgb(130, 130, 255);
+}
+
+.priority-low {
+    border-left: 5px solid rgb(78, 203, 78);
+}
+
+.priority-medium {
+    border-left: 5px solid rgb(253, 228, 6);
+}
+
+.priority-high {
+    border-left: 5px solid red;
+}
+
+.title {
+    flex: 1;
+}
+
+.checked {
+    color: rgb(122, 122, 122);
+    text-decoration: line-through;
+}
+
+footer {
+    padding: .8rem 2rem;
+    text-align: center;
+    background-color: rgb(110, 110, 110);
+    color: rgb(250, 250, 250);
+}
+
+#title,
+#details {
+    border: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: 12px;
+    width: 260px;
+    border-radius: 3px;
+    outline: none;
+}
+
+#title:focus::placeholder,
+#details:focus::placeholder {
+    color: transparent
+}
+
+#title::placeholder,
+#details::placeholder  {
+    transition: color 0.3s ease;
+}
+
+textarea {
+    resize: none;
+    height: 150px;
+}
+
+input[type='date'] {
+    outline: none;
+    border: none;
+    padding: .5rem;
+    border-radius: 3px;
+}
+
+.custom {
+    color: rgb(246, 246, 246)
+}
+
+.custom input {
+    display: none;
+}
+
+.custom > span {
+    margin-top: 0.5rem;
+    display: inline-block;
+    width: 7rem;
+    padding: .3rem 0px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.low {
+    background: rgb(128, 228, 114);
+}
+
+.med {
+    background-color: rgb(208, 208, 57);
+}
+
+.high {
+    background: rgb(204, 65, 65);
+}
+
+.custom input:checked + .low{
+    background: rgb(13, 255, 0);
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.custom input:checked + .med{
+    background: rgb(233, 230, 42);
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.custom input:checked + .high{
+    background: rgb(255, 76, 36);
+    border: 2px solid rgb(255, 255, 255);
+}
+
+#close-form-btn {
+    background-image: url('./icons/close.svg');
+    width: 1.8rem;
+    height: 1.8rem;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+#add,
+#edit {
+    padding: .5rem 1rem;
+    border: none;
+    background: rgb(253, 253, 253);
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgb(183, 183, 183);
+}
+
+#add:hover,
+#edit:hover {
+    background: rgb(237, 237, 237);
+    cursor: pointer;
 }

@@ -1,0 +1,2 @@
+
+export const defaultprojects = JSON.parse('[{"name":"Home","todos":[{"title":"eat","details":"","dueDate":"2023-03-01","priority":"medium","checked":true},{"title":"walk a dog","details":"","dueDate":"2023-02-01","priority":"medium","checked":false}]},{"name":"School","todos":[{"title":"study math","details":"","dueDate":"2023-03-01","priority":"medium","checked":true},{"title":"finish project","details":"","dueDate":"2023-03-10","priority":"high","checked":false}]}]')
